@@ -1,0 +1,836 @@
+{
+  "schema_version": 1,
+  "model_sha256": "eb082ddedbff3d6c7e0551778673988fe9f86e05bc11d8a2baabeaf947cbaef7",
+  "review_sha256": "fd8de178c394249d33d8a30fa478544aceb46e98899f66b287915f7d4f8a07e8",
+  "mounts": [
+    {
+      "part_id": "waist_buckle_left_lower",
+      "evidence": "实际源面共点；保留全部衣料归属及内外层，不按最近衣面猜测。",
+      "anchors": [
+        {
+          "rigid_vertex_id": 16054,
+          "cloth_part": "m11-f9610",
+          "cloth_vertex_id": 16589
+        },
+        {
+          "rigid_vertex_id": 16054,
+          "cloth_part": "m18-f37772",
+          "cloth_vertex_id": 11971
+        },
+        {
+          "rigid_vertex_id": 16067,
+          "cloth_part": "m18-f37772",
+          "cloth_vertex_id": 11908
+        },
+        {
+          "rigid_vertex_id": 16068,
+          "cloth_part": "m18-f37772",
+          "cloth_vertex_id": 11910
+        },
+        {
+          "rigid_vertex_id": 16071,
+          "cloth_part": "m18-f37772",
+          "cloth_vertex_id": 11942
+        },
+        {
+          "rigid_vertex_id": 16072,
+          "cloth_part": "m18-f37772",
+          "cloth_vertex_id": 11944
+        },
+        {
+          "rigid_vertex_id": 16075,
+          "cloth_part": "m18-f37772",
+          "cloth_vertex_id": 11910
+        },
+        {
+          "rigid_vertex_id": 16076,
+          "cloth_part": "m18-f37772",
+          "cloth_vertex_id": 11940
+        },
+        {
+          "rigid_vertex_id": 16079,
+          "cloth_part": "m18-f37772",
+          "cloth_vertex_id": 11966
+        },
+        {
+          "rigid_vertex_id": 16080,
+          "cloth_part": "m18-f37772",
+          "cloth_vertex_id": 11949
+        },
+        {
+          "rigid_vertex_id": 16083,
+          "cloth_part": "m18-f37772",
+          "cloth_vertex_id": 11946
+        },
+        {
+          "rigid_vertex_id": 16084,
+          "cloth_part": "m18-f37772",
+          "cloth_vertex_id": 11964
+        },
+        {
+          "rigid_vertex_id": 16087,
+          "cloth_part": "m18-f37772",
+          "cloth_vertex_id": 11947
+        },
+        {
+          "rigid_vertex_id": 16088,
+          "cloth_part": "m18-f37772",
+          "cloth_vertex_id": 11965
+        },
+        {
+          "rigid_vertex_id": 16091,
+          "cloth_part": "m11-f9610",
+          "cloth_vertex_id": 17147
+        },
+        {
+          "rigid_vertex_id": 16091,
+          "cloth_part": "m11-f9610",
+          "cloth_vertex_id": 17488
+        },
+        {
+          "rigid_vertex_id": 16091,
+          "cloth_part": "m18-f37772",
+          "cloth_vertex_id": 11945
+        },
+        {
+          "rigid_vertex_id": 16092,
+          "cloth_part": "m11-f9610",
+          "cloth_vertex_id": 17145
+        },
+        {
+          "rigid_vertex_id": 16093,
+          "cloth_part": "m18-f37772",
+          "cloth_vertex_id": 11968
+        },
+        {
+          "rigid_vertex_id": 16095,
+          "cloth_part": "m11-f9610",
+          "cloth_vertex_id": 16588
+        },
+        {
+          "rigid_vertex_id": 16096,
+          "cloth_part": "m11-f9610",
+          "cloth_vertex_id": 17126
+        },
+        {
+          "rigid_vertex_id": 16097,
+          "cloth_part": "m11-f9610",
+          "cloth_vertex_id": 17130
+        },
+        {
+          "rigid_vertex_id": 16097,
+          "cloth_part": "m11-f9610",
+          "cloth_vertex_id": 17141
+        },
+        {
+          "rigid_vertex_id": 16099,
+          "cloth_part": "m18-f37772",
+          "cloth_vertex_id": 11949
+        },
+        {
+          "rigid_vertex_id": 16102,
+          "cloth_part": "m18-f37772",
+          "cloth_vertex_id": 11942
+        },
+        {
+          "rigid_vertex_id": 16124,
+          "cloth_part": "m18-f37772",
+          "cloth_vertex_id": 11968
+        },
+        {
+          "rigid_vertex_id": 16126,
+          "cloth_part": "m18-f37772",
+          "cloth_vertex_id": 11967
+        },
+        {
+          "rigid_vertex_id": 16129,
+          "cloth_part": "m11-f9610",
+          "cloth_vertex_id": 17129
+        },
+        {
+          "rigid_vertex_id": 16130,
+          "cloth_part": "m11-f9610",
+          "cloth_vertex_id": 16589
+        },
+        {
+          "rigid_vertex_id": 16130,
+          "cloth_part": "m18-f37772",
+          "cloth_vertex_id": 11971
+        },
+        {
+          "rigid_vertex_id": 16131,
+          "cloth_part": "m11-f9610",
+          "cloth_vertex_id": 16567
+        },
+        {
+          "rigid_vertex_id": 16133,
+          "cloth_part": "m11-f9610",
+          "cloth_vertex_id": 16588
+        },
+        {
+          "rigid_vertex_id": 16138,
+          "cloth_part": "m11-f9610",
+          "cloth_vertex_id": 17147
+        },
+        {
+          "rigid_vertex_id": 16138,
+          "cloth_part": "m11-f9610",
+          "cloth_vertex_id": 17488
+        },
+        {
+          "rigid_vertex_id": 16138,
+          "cloth_part": "m18-f37772",
+          "cloth_vertex_id": 11945
+        },
+        {
+          "rigid_vertex_id": 16624,
+          "cloth_part": "m11-f9610",
+          "cloth_vertex_id": 16602
+        },
+        {
+          "rigid_vertex_id": 16624,
+          "cloth_part": "m11-f9610",
+          "cloth_vertex_id": 16650
+        },
+        {
+          "rigid_vertex_id": 16625,
+          "cloth_part": "m11-f9610",
+          "cloth_vertex_id": 16588
+        },
+        {
+          "rigid_vertex_id": 16626,
+          "cloth_part": "m11-f9610",
+          "cloth_vertex_id": 17130
+        },
+        {
+          "rigid_vertex_id": 16626,
+          "cloth_part": "m11-f9610",
+          "cloth_vertex_id": 17141
+        }
+      ],
+      "motion_mode": "source_skinned_attachment",
+      "motion_mode_evidence": "2026-11-16 BUCKLE_ATTACHMENT_REVIEW: continuous native seams and matching skin weights; retain immutable input skin deformation with whole-part correction, not constant-shape rigid physics."
+    },
+    {
+      "part_id": "waist_buckle_left_upper",
+      "evidence": "实际源面共点；保留全部衣料归属及内外层，不按最近衣面猜测。",
+      "anchors": [
+        {
+          "rigid_vertex_id": 15982,
+          "cloth_part": "m18-f37772",
+          "cloth_vertex_id": 11980
+        },
+        {
+          "rigid_vertex_id": 15983,
+          "cloth_part": "m18-f37772",
+          "cloth_vertex_id": 11973
+        },
+        {
+          "rigid_vertex_id": 15986,
+          "cloth_part": "m18-f37772",
+          "cloth_vertex_id": 11951
+        },
+        {
+          "rigid_vertex_id": 15987,
+          "cloth_part": "m18-f37772",
+          "cloth_vertex_id": 11952
+        },
+        {
+          "rigid_vertex_id": 15989,
+          "cloth_part": "m18-f37772",
+          "cloth_vertex_id": 11950
+        },
+        {
+          "rigid_vertex_id": 15991,
+          "cloth_part": "m18-f37772",
+          "cloth_vertex_id": 11973
+        },
+        {
+          "rigid_vertex_id": 15994,
+          "cloth_part": "m18-f37772",
+          "cloth_vertex_id": 11876
+        },
+        {
+          "rigid_vertex_id": 15995,
+          "cloth_part": "m18-f37772",
+          "cloth_vertex_id": 11875
+        },
+        {
+          "rigid_vertex_id": 15998,
+          "cloth_part": "m18-f37772",
+          "cloth_vertex_id": 11958
+        },
+        {
+          "rigid_vertex_id": 15999,
+          "cloth_part": "m18-f37772",
+          "cloth_vertex_id": 11981
+        },
+        {
+          "rigid_vertex_id": 16002,
+          "cloth_part": "m18-f37772",
+          "cloth_vertex_id": 11957
+        },
+        {
+          "rigid_vertex_id": 16003,
+          "cloth_part": "m18-f37772",
+          "cloth_vertex_id": 12000
+        },
+        {
+          "rigid_vertex_id": 16006,
+          "cloth_part": "m18-f37772",
+          "cloth_vertex_id": 11948
+        },
+        {
+          "rigid_vertex_id": 16007,
+          "cloth_part": "m18-f37772",
+          "cloth_vertex_id": 11984
+        },
+        {
+          "rigid_vertex_id": 16010,
+          "cloth_part": "m18-f37772",
+          "cloth_vertex_id": 11955
+        },
+        {
+          "rigid_vertex_id": 16011,
+          "cloth_part": "m11-f9610",
+          "cloth_vertex_id": 16604
+        },
+        {
+          "rigid_vertex_id": 16011,
+          "cloth_part": "m11-f9610",
+          "cloth_vertex_id": 16621
+        },
+        {
+          "rigid_vertex_id": 16011,
+          "cloth_part": "m18-f37772",
+          "cloth_vertex_id": 11972
+        },
+        {
+          "rigid_vertex_id": 16013,
+          "cloth_part": "m18-f37772",
+          "cloth_vertex_id": 11978
+        },
+        {
+          "rigid_vertex_id": 16014,
+          "cloth_part": "m18-f37772",
+          "cloth_vertex_id": 11979
+        },
+        {
+          "rigid_vertex_id": 16037,
+          "cloth_part": "m18-f37772",
+          "cloth_vertex_id": 11948
+        },
+        {
+          "rigid_vertex_id": 16040,
+          "cloth_part": "m18-f37772",
+          "cloth_vertex_id": 11999
+        },
+        {
+          "rigid_vertex_id": 16043,
+          "cloth_part": "m18-f37772",
+          "cloth_vertex_id": 11956
+        },
+        {
+          "rigid_vertex_id": 16136,
+          "cloth_part": "m18-f37772",
+          "cloth_vertex_id": 11879
+        },
+        {
+          "rigid_vertex_id": 16137,
+          "cloth_part": "m18-f37772",
+          "cloth_vertex_id": 11983
+        },
+        {
+          "rigid_vertex_id": 16141,
+          "cloth_part": "m18-f37772",
+          "cloth_vertex_id": 11951
+        },
+        {
+          "rigid_vertex_id": 16143,
+          "cloth_part": "m11-f9610",
+          "cloth_vertex_id": 16603
+        },
+        {
+          "rigid_vertex_id": 16143,
+          "cloth_part": "m18-f37772",
+          "cloth_vertex_id": 11877
+        },
+        {
+          "rigid_vertex_id": 16149,
+          "cloth_part": "m18-f37772",
+          "cloth_vertex_id": 11978
+        },
+        {
+          "rigid_vertex_id": 17118,
+          "cloth_part": "m11-f9610",
+          "cloth_vertex_id": 16606
+        },
+        {
+          "rigid_vertex_id": 17120,
+          "cloth_part": "m11-f9610",
+          "cloth_vertex_id": 16604
+        },
+        {
+          "rigid_vertex_id": 17120,
+          "cloth_part": "m11-f9610",
+          "cloth_vertex_id": 16621
+        },
+        {
+          "rigid_vertex_id": 17120,
+          "cloth_part": "m18-f37772",
+          "cloth_vertex_id": 11972
+        },
+        {
+          "rigid_vertex_id": 17123,
+          "cloth_part": "m11-f9610",
+          "cloth_vertex_id": 16603
+        },
+        {
+          "rigid_vertex_id": 17123,
+          "cloth_part": "m18-f37772",
+          "cloth_vertex_id": 11877
+        },
+        {
+          "rigid_vertex_id": 17124,
+          "cloth_part": "m18-f37772",
+          "cloth_vertex_id": 11984
+        }
+      ],
+      "motion_mode": "source_skinned_attachment",
+      "motion_mode_evidence": "2026-11-16 BUCKLE_ATTACHMENT_REVIEW: continuous native seams and matching skin weights; retain immutable input skin deformation with whole-part correction, not constant-shape rigid physics."
+    },
+    {
+      "part_id": "waist_buckle_right_lower",
+      "evidence": "实际源面共点；保留全部衣料归属及内外层，不按最近衣面猜测。",
+      "anchors": [
+        {
+          "rigid_vertex_id": 16249,
+          "cloth_part": "m11-f9610",
+          "cloth_vertex_id": 16438
+        },
+        {
+          "rigid_vertex_id": 16249,
+          "cloth_part": "m18-f37772",
+          "cloth_vertex_id": 12161
+        },
+        {
+          "rigid_vertex_id": 16263,
+          "cloth_part": "m18-f37772",
+          "cloth_vertex_id": 12104
+        },
+        {
+          "rigid_vertex_id": 16265,
+          "cloth_part": "m18-f37772",
+          "cloth_vertex_id": 12105
+        },
+        {
+          "rigid_vertex_id": 16267,
+          "cloth_part": "m18-f37772",
+          "cloth_vertex_id": 12133
+        },
+        {
+          "rigid_vertex_id": 16269,
+          "cloth_part": "m18-f37772",
+          "cloth_vertex_id": 12134
+        },
+        {
+          "rigid_vertex_id": 16271,
+          "cloth_part": "m18-f37772",
+          "cloth_vertex_id": 12105
+        },
+        {
+          "rigid_vertex_id": 16273,
+          "cloth_part": "m18-f37772",
+          "cloth_vertex_id": 12131
+        },
+        {
+          "rigid_vertex_id": 16275,
+          "cloth_part": "m18-f37772",
+          "cloth_vertex_id": 12154
+        },
+        {
+          "rigid_vertex_id": 16277,
+          "cloth_part": "m18-f37772",
+          "cloth_vertex_id": 12140
+        },
+        {
+          "rigid_vertex_id": 16279,
+          "cloth_part": "m18-f37772",
+          "cloth_vertex_id": 12137
+        },
+        {
+          "rigid_vertex_id": 16280,
+          "cloth_part": "m18-f37772",
+          "cloth_vertex_id": 12153
+        },
+        {
+          "rigid_vertex_id": 16283,
+          "cloth_part": "m18-f37772",
+          "cloth_vertex_id": 12138
+        },
+        {
+          "rigid_vertex_id": 16284,
+          "cloth_part": "m18-f37772",
+          "cloth_vertex_id": 12155
+        },
+        {
+          "rigid_vertex_id": 16287,
+          "cloth_part": "m11-f9610",
+          "cloth_vertex_id": 17151
+        },
+        {
+          "rigid_vertex_id": 16288,
+          "cloth_part": "m11-f9610",
+          "cloth_vertex_id": 17148
+        },
+        {
+          "rigid_vertex_id": 16288,
+          "cloth_part": "m11-f9610",
+          "cloth_vertex_id": 17150
+        },
+        {
+          "rigid_vertex_id": 16288,
+          "cloth_part": "m11-f9610",
+          "cloth_vertex_id": 17486
+        },
+        {
+          "rigid_vertex_id": 16288,
+          "cloth_part": "m18-f37772",
+          "cloth_vertex_id": 12136
+        },
+        {
+          "rigid_vertex_id": 16289,
+          "cloth_part": "m18-f37772",
+          "cloth_vertex_id": 12157
+        },
+        {
+          "rigid_vertex_id": 16291,
+          "cloth_part": "m11-f9610",
+          "cloth_vertex_id": 16437
+        },
+        {
+          "rigid_vertex_id": 16292,
+          "cloth_part": "m11-f9610",
+          "cloth_vertex_id": 17135
+        },
+        {
+          "rigid_vertex_id": 16294,
+          "cloth_part": "m11-f9610",
+          "cloth_vertex_id": 17137
+        },
+        {
+          "rigid_vertex_id": 16294,
+          "cloth_part": "m11-f9610",
+          "cloth_vertex_id": 17139
+        },
+        {
+          "rigid_vertex_id": 16295,
+          "cloth_part": "m18-f37772",
+          "cloth_vertex_id": 12140
+        },
+        {
+          "rigid_vertex_id": 16298,
+          "cloth_part": "m18-f37772",
+          "cloth_vertex_id": 12133
+        },
+        {
+          "rigid_vertex_id": 16320,
+          "cloth_part": "m18-f37772",
+          "cloth_vertex_id": 12157
+        },
+        {
+          "rigid_vertex_id": 16321,
+          "cloth_part": "m18-f37772",
+          "cloth_vertex_id": 12156
+        },
+        {
+          "rigid_vertex_id": 16325,
+          "cloth_part": "m11-f9610",
+          "cloth_vertex_id": 17132
+        },
+        {
+          "rigid_vertex_id": 16326,
+          "cloth_part": "m11-f9610",
+          "cloth_vertex_id": 16438
+        },
+        {
+          "rigid_vertex_id": 16326,
+          "cloth_part": "m18-f37772",
+          "cloth_vertex_id": 12161
+        },
+        {
+          "rigid_vertex_id": 16327,
+          "cloth_part": "m11-f9610",
+          "cloth_vertex_id": 16413
+        },
+        {
+          "rigid_vertex_id": 16328,
+          "cloth_part": "m11-f9610",
+          "cloth_vertex_id": 16437
+        },
+        {
+          "rigid_vertex_id": 17142,
+          "cloth_part": "m11-f9610",
+          "cloth_vertex_id": 16449
+        },
+        {
+          "rigid_vertex_id": 17142,
+          "cloth_part": "m11-f9610",
+          "cloth_vertex_id": 16504
+        },
+        {
+          "rigid_vertex_id": 17143,
+          "cloth_part": "m11-f9610",
+          "cloth_vertex_id": 17137
+        },
+        {
+          "rigid_vertex_id": 17143,
+          "cloth_part": "m11-f9610",
+          "cloth_vertex_id": 17139
+        },
+        {
+          "rigid_vertex_id": 17144,
+          "cloth_part": "m11-f9610",
+          "cloth_vertex_id": 16437
+        }
+      ],
+      "motion_mode": "source_skinned_attachment",
+      "motion_mode_evidence": "2026-11-16 BUCKLE_ATTACHMENT_REVIEW: continuous native seams and matching skin weights; retain immutable input skin deformation with whole-part correction, not constant-shape rigid physics."
+    },
+    {
+      "part_id": "waist_buckle_right_upper",
+      "evidence": "实际源面共点；保留全部衣料归属及内外层，不按最近衣面猜测。",
+      "anchors": [
+        {
+          "rigid_vertex_id": 16158,
+          "cloth_part": "m11-f9610",
+          "cloth_vertex_id": 16452
+        },
+        {
+          "rigid_vertex_id": 16159,
+          "cloth_part": "m11-f9610",
+          "cloth_vertex_id": 16451
+        },
+        {
+          "rigid_vertex_id": 16159,
+          "cloth_part": "m11-f9610",
+          "cloth_vertex_id": 16473
+        },
+        {
+          "rigid_vertex_id": 16159,
+          "cloth_part": "m18-f37772",
+          "cloth_vertex_id": 12160
+        },
+        {
+          "rigid_vertex_id": 16175,
+          "cloth_part": "m18-f37772",
+          "cloth_vertex_id": 12168
+        },
+        {
+          "rigid_vertex_id": 16177,
+          "cloth_part": "m18-f37772",
+          "cloth_vertex_id": 12162
+        },
+        {
+          "rigid_vertex_id": 16179,
+          "cloth_part": "m18-f37772",
+          "cloth_vertex_id": 12142
+        },
+        {
+          "rigid_vertex_id": 16181,
+          "cloth_part": "m18-f37772",
+          "cloth_vertex_id": 12143
+        },
+        {
+          "rigid_vertex_id": 16182,
+          "cloth_part": "m18-f37772",
+          "cloth_vertex_id": 12141
+        },
+        {
+          "rigid_vertex_id": 16185,
+          "cloth_part": "m18-f37772",
+          "cloth_vertex_id": 12162
+        },
+        {
+          "rigid_vertex_id": 16187,
+          "cloth_part": "m18-f37772",
+          "cloth_vertex_id": 12074
+        },
+        {
+          "rigid_vertex_id": 16189,
+          "cloth_part": "m18-f37772",
+          "cloth_vertex_id": 12075
+        },
+        {
+          "rigid_vertex_id": 16191,
+          "cloth_part": "m18-f37772",
+          "cloth_vertex_id": 12148
+        },
+        {
+          "rigid_vertex_id": 16192,
+          "cloth_part": "m18-f37772",
+          "cloth_vertex_id": 12169
+        },
+        {
+          "rigid_vertex_id": 16195,
+          "cloth_part": "m18-f37772",
+          "cloth_vertex_id": 12149
+        },
+        {
+          "rigid_vertex_id": 16196,
+          "cloth_part": "m18-f37772",
+          "cloth_vertex_id": 12188
+        },
+        {
+          "rigid_vertex_id": 16199,
+          "cloth_part": "m18-f37772",
+          "cloth_vertex_id": 12139
+        },
+        {
+          "rigid_vertex_id": 16200,
+          "cloth_part": "m18-f37772",
+          "cloth_vertex_id": 12172
+        },
+        {
+          "rigid_vertex_id": 16203,
+          "cloth_part": "m11-f9610",
+          "cloth_vertex_id": 16451
+        },
+        {
+          "rigid_vertex_id": 16203,
+          "cloth_part": "m11-f9610",
+          "cloth_vertex_id": 16473
+        },
+        {
+          "rigid_vertex_id": 16203,
+          "cloth_part": "m18-f37772",
+          "cloth_vertex_id": 12160
+        },
+        {
+          "rigid_vertex_id": 16204,
+          "cloth_part": "m18-f37772",
+          "cloth_vertex_id": 12147
+        },
+        {
+          "rigid_vertex_id": 16206,
+          "cloth_part": "m18-f37772",
+          "cloth_vertex_id": 12166
+        },
+        {
+          "rigid_vertex_id": 16208,
+          "cloth_part": "m18-f37772",
+          "cloth_vertex_id": 12167
+        },
+        {
+          "rigid_vertex_id": 16227,
+          "cloth_part": "m18-f37772",
+          "cloth_vertex_id": 12171
+        },
+        {
+          "rigid_vertex_id": 16229,
+          "cloth_part": "m18-f37772",
+          "cloth_vertex_id": 12172
+        },
+        {
+          "rigid_vertex_id": 16231,
+          "cloth_part": "m18-f37772",
+          "cloth_vertex_id": 12139
+        },
+        {
+          "rigid_vertex_id": 16233,
+          "cloth_part": "m18-f37772",
+          "cloth_vertex_id": 12187
+        },
+        {
+          "rigid_vertex_id": 16235,
+          "cloth_part": "m18-f37772",
+          "cloth_vertex_id": 12146
+        },
+        {
+          "rigid_vertex_id": 16330,
+          "cloth_part": "m18-f37772",
+          "cloth_vertex_id": 12077
+        },
+        {
+          "rigid_vertex_id": 16334,
+          "cloth_part": "m18-f37772",
+          "cloth_vertex_id": 12142
+        },
+        {
+          "rigid_vertex_id": 16341,
+          "cloth_part": "m18-f37772",
+          "cloth_vertex_id": 12166
+        },
+        {
+          "rigid_vertex_id": 17117,
+          "cloth_part": "m11-f9610",
+          "cloth_vertex_id": 16450
+        },
+        {
+          "rigid_vertex_id": 17117,
+          "cloth_part": "m18-f37772",
+          "cloth_vertex_id": 12076
+        },
+        {
+          "rigid_vertex_id": 17122,
+          "cloth_part": "m11-f9610",
+          "cloth_vertex_id": 16450
+        },
+        {
+          "rigid_vertex_id": 17122,
+          "cloth_part": "m18-f37772",
+          "cloth_vertex_id": 12076
+        }
+      ],
+      "motion_mode": "source_skinned_attachment",
+      "motion_mode_evidence": "2026-11-16 BUCKLE_ATTACHMENT_REVIEW: continuous native seams and matching skin weights; retain immutable input skin deformation with whole-part correction, not constant-shape rigid physics."
+    },
+    {
+      "part_id": "m16-f33599",
+      "evidence": "实际源面共点；保留全部衣料归属及内外层，不按最近衣面猜测。",
+      "anchors": [
+        {
+          "rigid_vertex_id": 4250,
+          "cloth_part": "m11-f7924",
+          "cloth_vertex_id": 4250
+        },
+        {
+          "rigid_vertex_id": 4251,
+          "cloth_part": "m11-f7924",
+          "cloth_vertex_id": 4251
+        },
+        {
+          "rigid_vertex_id": 4251,
+          "cloth_part": "m11-f7924",
+          "cloth_vertex_id": 9486
+        },
+        {
+          "rigid_vertex_id": 4251,
+          "cloth_part": "m11-f7924",
+          "cloth_vertex_id": 9500
+        },
+        {
+          "rigid_vertex_id": 4252,
+          "cloth_part": "m11-f7924",
+          "cloth_vertex_id": 9436
+        },
+        {
+          "rigid_vertex_id": 4253,
+          "cloth_part": "m11-f7924",
+          "cloth_vertex_id": 4253
+        },
+        {
+          "rigid_vertex_id": 4254,
+          "cloth_part": "m11-f7924",
+          "cloth_vertex_id": 4254
+        },
+        {
+          "rigid_vertex_id": 4254,
+          "cloth_part": "m11-f7924",
+          "cloth_vertex_id": 9954
+        }
+      ],
+      "motion_mode": "rest_rigid"
+    }
+  ]
+}

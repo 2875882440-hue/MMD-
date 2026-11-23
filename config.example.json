@@ -1,0 +1,21 @@
+{
+  "blender_path": "C:/Program Files/Blender Foundation/Blender/blender.exe",
+  "characters": {
+    "nahida": {
+      "scene_path": "assets/characters/nahida/Nahida_KamiNoManimani_Toon_SmoothMotion30.blend",
+      "weights_scene_path": "assets/characters/nahida/Moonlit_Lotus_Refined.blend"
+    }
+  },
+  "secondary_motion": {
+    "enabled": false,
+    "stage": "profile_inspection",
+    "profiles_dir": "profiles/secondary_motion"
+  },
+  "blender_plugins": {
+    "mmd_tools": {
+      "blender_path": "C:/Tools/Blender-5.2-portable/blender.exe",
+      "fallback": true,
+      "fallback_mode": "hair"
+    }
+  }
+}

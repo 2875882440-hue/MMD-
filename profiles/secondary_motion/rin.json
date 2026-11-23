@@ -1,0 +1,259 @@
+{
+  "schema_version": 2,
+  "id": "rin",
+  "display_name": "远坂凛 · 模型衣发配置",
+  "enabled": false,
+  "protect_primary_motion": true,
+  "primary_bones": [
+    "上半身",
+    "上半身2",
+    "下半身",
+    "全ての親",
+    "右ひざ",
+    "右ひざD",
+    "右ひじ",
+    "右手首",
+    "右肩",
+    "右腕",
+    "右足",
+    "右足D",
+    "右足首",
+    "右足首D",
+    "左ひざ",
+    "左ひざD",
+    "左ひじ",
+    "左手首",
+    "左肩",
+    "左腕",
+    "左足",
+    "左足D",
+    "左足首",
+    "左足首D",
+    "腰",
+    "頭",
+    "首"
+  ],
+  "model": {
+    "format": "pmx",
+    "path": "assets/characters/rin/TohsakaRin.pmx",
+    "scale": 0.08,
+    "sha256": "eb082ddedbff3d6c7e0551778673988fe9f86e05bc11d8a2baabeaf947cbaef7"
+  },
+  "candidate_name_tokens": {
+    "hair": [
+      "髪",
+      "髮",
+      "馬尾",
+      "马尾",
+      "ツインテ"
+    ],
+    "cloth": [
+      "スカート",
+      "裙",
+      "衣",
+      "袖",
+      "マント",
+      "夾克"
+    ],
+    "accessory": [
+      "リボン",
+      "飾",
+      "饰",
+      "金属",
+      "金屬"
+    ]
+  },
+  "status": "hair_dynamics_experimental_cli",
+  "note": "模型配置与视频无关；准备器不启用仿真，实验发束求解须使用独立CLI显式启用，衣服仿真尚未实现",
+  "protected_surface_policy": "exclude_and_report",
+  "bindings": {
+    "blend_asset": "assets/characters/rin/Rin_Model.blend",
+    "armature": "TohsakaRin_arm",
+    "mesh": "TohsakaRin_mesh",
+    "bone_aliases": {}
+  },
+  "floor": {
+    "axis": "Z",
+    "height_m": 0.0,
+    "collision_group": 15
+  },
+  "regions": [
+    {
+      "id": "hair",
+      "role": "hair",
+      "materials": [
+        "髪"
+      ],
+      "deformation_policy": "bone_dynamics_candidate"
+    },
+    {
+      "id": "cloth",
+      "role": "cloth",
+      "materials": [
+        "衣",
+        "衣+",
+        "上衣內著"
+      ],
+      "deformation_policy": "bone_dynamics_candidate"
+    },
+    {
+      "id": "accessories",
+      "role": "accessory",
+      "materials": [
+        "衣金屬",
+        "寶石"
+      ],
+      "deformation_policy": "follow_source_skinning"
+    },
+    {
+      "id": "boots",
+      "role": "boots",
+      "materials": [
+        "靴"
+      ],
+      "deformation_policy": "kinematic"
+    },
+    {
+      "id": "body",
+      "role": "body",
+      "materials": [
+        "眉睫",
+        "顏",
+        "顏赤+",
+        "口",
+        "舌",
+        "齒",
+        "白目",
+        "目",
+        "目光",
+        "目光1",
+        "襪",
+        "肌",
+        "肌2",
+        "內著",
+        "biaoq",
+        "目影",
+        "新規材質1"
+      ],
+      "deformation_policy": "kinematic"
+    }
+  ],
+  "hair_dynamics": {
+    "method": "spring_bones_v1",
+    "include_bone_tokens": [
+      "馬尾",
+      "後髪",
+      "劉海"
+    ],
+    "exclude_bone_tokens": [
+      "髮飾",
+      "髪飾"
+    ],
+    "body_collision_policy": "explicit_hair_body_override",
+    "body_collider_ids": [
+      0,
+      1,
+      2,
+      3,
+      4,
+      5,
+      6,
+      7,
+      8,
+      9,
+      10,
+      11,
+      12,
+      13,
+      14,
+      15,
+      16,
+      17,
+      18,
+      19
+    ],
+    "substeps": 6,
+    "collision_iterations": 3,
+    "warmup_seconds": 5.0,
+    "drag_per_second": 30.0,
+    "rest_acceleration": 450.0,
+    "driver_force_filter_hz": 6.0,
+    "driver_acceleration_limit_m_s2": 40.0,
+    "driver_angular_acceleration_limit_rad_s2": 80.0,
+    "max_joint_speed_rad_s": 0.9,
+    "contact_joint_speed_rad_s": 1.2,
+    "inertia_strength": 0.25,
+    "gravity_m_s2": [
+      0,
+      0,
+      -9.81
+    ],
+    "collision_margin_m": 0.001,
+    "strand_radius_scale": 0.35,
+    "note": "Experimental one-way hair-only solver. Explicit body proxy policy overrides the native exclusion masks, whose original values remain preserved. No hair self-collision or cross-strand six-DOF joints."
+  },
+  "surface_dynamics": {
+    "method": "native_cloth_actual_triangles_v1",
+    "warmup_seconds": 5.0,
+    "body_materials": [
+      "肌",
+      "肌2",
+      "襪",
+      "顏",
+      "靴"
+    ],
+    "ornament_bone_tokens": [
+      "髮飾",
+      "髪飾"
+    ],
+    "maximum_rigid_extent_m": 0.16,
+    "cloth_quality": 8,
+    "mass_kg": 0.05,
+    "tension_stiffness": 40.0,
+    "compression_stiffness": 40.0,
+    "shear_stiffness": 25.0,
+    "bending_stiffness": 5.0,
+    "air_damping": 5.0,
+    "material_damping": 15.0,
+    "pin_stiffness": 15.0,
+    "minimum_pose_guide": 0.7,
+    "collision_quality": 6,
+    "body_gap_m": 0.002,
+    "self_gap_m": 0.001,
+    "impulse_clamp": 0.2,
+    "self_impulse_clamp": 0.1,
+    "floor_z_m": 0.0,
+    "anchor_band_m": 0.015,
+    "max_displacement_m": 2.0
+  },
+  "surface_segmentation": {
+    "schema_version": 1,
+    "required_for_surface_dynamics": true,
+    "review": null,
+    "review_file": {
+      "path": "profiles/secondary_motion/rin-review.json",
+      "sha256": "849df4dd844e7bde3824ade179d85020a2851b4353b4faa1db5678515b0bc13a"
+    }
+  },
+  "secondary_contact_rules": {
+    "schema_version": 1,
+    "policy": "model_contacts_v1",
+    "bindings": null
+  },
+  "source_surface_map": {
+    "path": "profiles/secondary_motion/rin-source-map.json",
+    "sha256": "25a1e8166d060751732115c88eccdfd7510135f809a47cf44b56c36836e52f6f"
+  },
+  "source_connections": {
+    "path": "profiles/secondary_motion/rin-connections.json",
+    "sha256": "880bb92614248dbfa11967ce456cd0eb38de0fadbad306f03216dfcd26c90c4c"
+  },
+  "articulated_connections": {
+    "path": "profiles/secondary_motion/rin-articulated.json",
+    "sha256": "c6d6006e4fd260093d0919cab3ae83e6129c4d999a013ed520cc911e26224351"
+  },
+  "surface_mounts": {
+    "path": "profiles/secondary_motion/rin-surface-mounts.json",
+    "sha256": "044f0f07b356c267f0d4193fa50737391e891739dc43da6fa5895afdc7d07656"
+  }
+}

@@ -1,0 +1,9 @@
+{
+  "sources": [
+    {
+      "profile": "rin",
+      "label": "Rin · 已有MOMO动作（物理前）",
+      "scene": "output/secondary_motion/dev2/rin-dance-binding/configured-model.blend"
+    }
+  ]
+}

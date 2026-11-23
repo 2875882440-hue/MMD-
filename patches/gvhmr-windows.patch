@@ -1,0 +1,131 @@
+diff --git a/hmr4d/network/hmr2/smpl_head.py b/hmr4d/network/hmr2/smpl_head.py
+index 5af5cac..8fe195f 100644
+--- a/hmr4d/network/hmr2/smpl_head.py
++++ b/hmr4d/network/hmr2/smpl_head.py
+@@ -71,7 +71,7 @@ class SMPLTransformerDecoderHead(nn.Module):
+             if self.input_is_mean_shape:
+                 token = torch.cat([pred_body_pose, pred_betas, pred_cam], dim=1)[:, None, :]
+             else:
+-                token = torch.zeros(batch_size, 1, 1).to(x.device)
++                token = torch.zeros(batch_size, 1, 1).to(x)
+ 
+             # Pass through transformer
+             token_out = self.transformer(token, context=x)
+diff --git a/hmr4d/utils/geo_transform.py b/hmr4d/utils/geo_transform.py
+index 028cc35..07acf44 100644
+--- a/hmr4d/utils/geo_transform.py
++++ b/hmr4d/utils/geo_transform.py
+@@ -4,7 +4,6 @@ import torch
+ import torch.nn.functional as F
+ from pytorch3d.transforms import so3_exp_map, so3_log_map
+ from pytorch3d.transforms import matrix_to_quaternion, quaternion_to_axis_angle, matrix_to_rotation_6d
+-import pytorch3d.ops.knn as knn
+ from hmr4d.utils.pylogger import Log
+ from pytorch3d.transforms import euler_angles_to_matrix
+ import hmr4d.utils.matrix as matrix
+@@ -293,6 +292,8 @@ def get_nearby_points(points, query_verts, padding=0.0, p=1):
+         idx = (((points - min_xyz) > 0).all(dim=-1) * ((points - max_xyz) < 0).all(dim=-1)).nonzero().squeeze(-1)
+         nearby_points = points[idx]
+     elif p == 2:
++        # MotionBridge: compiled KNN is optional for inference-only Windows use.
++        from pytorch3d.ops import knn
+         squared_dist, _, _ = knn.knn_points(points[None], query_verts[None], K=1, return_nn=False)
+         mask = squared_dist[0, :, 0] < padding**2  # (S,)
+         nearby_points = points[mask]
+diff --git a/hmr4d/utils/preproc/vitfeat_extractor.py b/hmr4d/utils/preproc/vitfeat_extractor.py
+index 6ae37f5..cce66ae 100644
+--- a/hmr4d/utils/preproc/vitfeat_extractor.py
++++ b/hmr4d/utils/preproc/vitfeat_extractor.py
+@@ -1,4 +1,5 @@
+ import torch
++import os
+ from hmr4d.network.hmr2 import load_hmr2, HMR2
+ 
+ 
+@@ -59,7 +60,10 @@ def get_batch(input_path, bbx_xys, img_ds=0.5, img_dst_size=256, path_type="vide
+ 
+ class Extractor:
+     def __init__(self, tqdm_leave=True):
+-        self.extractor: HMR2 = load_hmr2().cuda().eval()
++        self.extractor: HMR2 = load_hmr2()
++        if os.environ.get("MOTIONBRIDGE_GVHMR_FEATURE_PRECISION") == "fp16":
++            self.extractor.half()
++        self.extractor.cuda().eval()
+         self.tqdm_leave = tqdm_leave
+ 
+     def extract_video_features(self, video_path, bbx_xys, img_ds=0.5):
+@@ -75,15 +79,15 @@ class Extractor:
+ 
+         # Inference
+         F, _, H, W = imgs.shape  # (F, 3, H, W)
+-        imgs = imgs.cuda()
+-        batch_size = 16  # 5GB GPU memory, occupies all CUDA cores of 3090
++        # MotionBridge: keep full video crops on CPU and transfer only one batch.
++        batch_size = max(1, int(os.environ.get("MOTIONBRIDGE_GVHMR_BATCH_SIZE", "16")))
+         features = []
+         for j in tqdm(range(0, F, batch_size), desc="HMR2 Feature", leave=self.tqdm_leave):
+-            imgs_batch = imgs[j : j + batch_size]
++            imgs_batch = imgs[j : j + batch_size].to(device="cuda", dtype=next(self.extractor.parameters()).dtype)
+ 
+             with torch.no_grad():
+                 feature = self.extractor({"img": imgs_batch})
+-                features.append(feature.detach().cpu())
++                features.append(feature.detach().float().cpu())
+ 
+         features = torch.cat(features, dim=0).clone()  # (F, 1024)
+         return features
+diff --git a/hmr4d/utils/preproc/vitpose.py b/hmr4d/utils/preproc/vitpose.py
+index 215adc8..5c5a5c8 100644
+--- a/hmr4d/utils/preproc/vitpose.py
++++ b/hmr4d/utils/preproc/vitpose.py
+@@ -1,4 +1,5 @@
+ import torch
++import os
+ import torch.nn.functional as F
+ import numpy as np
+ from .vitpose_pytorch import build_model
+@@ -14,6 +15,8 @@ class VitPoseExtractor:
+     def __init__(self, tqdm_leave=True):
+         ckpt_path = "inputs/checkpoints/vitpose/vitpose-h-multi-coco.pth"
+         self.pose = build_model("ViTPose_huge_coco_256x192", ckpt_path)
++        if os.environ.get("MOTIONBRIDGE_GVHMR_FEATURE_PRECISION") == "fp16":
++            self.pose.half()
+         self.pose.cuda().eval()
+ 
+         self.flip_test = True
+@@ -30,11 +33,11 @@ class VitPoseExtractor:
+ 
+         # Inference
+         L, _, H, W = imgs.shape  # (L, 3, H, W)
+-        batch_size = 16
++        batch_size = max(1, int(os.environ.get("MOTIONBRIDGE_GVHMR_BATCH_SIZE", "16")))
+         vitpose = []
+         for j in tqdm(range(0, L, batch_size), desc="ViTPose", leave=self.tqdm_leave):
+             # Heat map
+-            imgs_batch = imgs[j : j + batch_size, :, :, 32:224].cuda()
++            imgs_batch = imgs[j : j + batch_size, :, :, 32:224].to(device="cuda", dtype=next(self.pose.parameters()).dtype)
+             if self.flip_test:
+                 heatmap, heatmap_flipped = self.pose(torch.cat([imgs_batch, imgs_batch.flip(3)], dim=0)).chunk(2)
+                 heatmap_flipped = flip_heatmap_coco17(heatmap_flipped)
+@@ -59,7 +62,7 @@ class VitPoseExtractor:
+ 
+             else:  # postprocess from mmpose
+                 bbx_xys_batch = bbx_xys[j : j + batch_size]
+-                heatmap = heatmap.clone().cpu().numpy()
++                heatmap = heatmap.float().cpu().numpy()
+                 center = bbx_xys_batch[:, :2].numpy()
+                 scale = (torch.cat((bbx_xys_batch[:, [2]] * 24 / 32, bbx_xys_batch[:, [2]]), dim=1) / 200).numpy()
+                 preds, maxvals = keypoints_from_heatmaps(heatmaps=heatmap, center=center, scale=scale, use_udp=True)
+diff --git a/hmr4d/utils/preproc/vitpose_pytorch/src/vitpose_infer/model_builder.py b/hmr4d/utils/preproc/vitpose_pytorch/src/vitpose_infer/model_builder.py
+index 1fcb014..b363b7d 100644
+--- a/hmr4d/utils/preproc/vitpose_pytorch/src/vitpose_infer/model_builder.py
++++ b/hmr4d/utils/preproc/vitpose_pytorch/src/vitpose_infer/model_builder.py
+@@ -158,7 +158,7 @@ def build_model(model_name, checkpoint=None):
+ 
+     pose = VitPoseModel(backbone, head)
+     if checkpoint is not None:
+-        check = torch.load(checkpoint)
++        check = torch.load(checkpoint, map_location="cpu")
+ 
+         pose.load_state_dict(check["state_dict"])
+     return pose

@@ -1,0 +1,164 @@
+<!doctype html>
+<html lang="zh-CN">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width,initial-scale=1">
+  <meta name="color-scheme" content="dark">
+  <meta name="description" content="MotionBridge 本地视频动作捕捉工作台">
+  <title>MotionBridge · 视频动作工作台</title>
+  <link rel="icon" href="/static/favicon.svg" type="image/svg+xml">
+  <link rel="stylesheet" href="/static/styles.css?v=0.6.9">
+  <link rel="stylesheet" href="/static/secondary.css?v=dev6">
+</head>
+<body>
+  <svg class="icon-defs" aria-hidden="true"><defs>
+    <symbol id="i-upload" viewBox="0 0 24 24"><path d="M12 16V3m-5 5 5-5 5 5M4 15v5h16v-5"/></symbol>
+    <symbol id="i-video" viewBox="0 0 24 24"><rect x="3" y="5" width="14" height="14" rx="3"/><path d="m17 10 4-3v10l-4-3M8 5v14M3 10h5M3 14h5"/></symbol>
+    <symbol id="i-play" viewBox="0 0 24 24"><path d="m8 4 12 8-12 8Z"/></symbol>
+    <symbol id="i-pause" viewBox="0 0 24 24"><path d="M8 5v14M16 5v14"/></symbol>
+    <symbol id="i-arrow" viewBox="0 0 24 24"><path d="M4 12h16m-6-6 6 6-6 6"/></symbol>
+    <symbol id="i-download" viewBox="0 0 24 24"><path d="M12 3v13m-5-5 5 5 5-5M4 17v4h16v-4"/></symbol>
+    <symbol id="i-box" viewBox="0 0 24 24"><path d="m12 2 9 5v10l-9 5-9-5V7Zm0 10L3 7m9 5 9-5m-9 5v10M7.5 4.5l9 5"/></symbol>
+    <symbol id="i-check" viewBox="0 0 24 24"><path d="m5 12 4 4L19 6"/></symbol>
+    <symbol id="i-reset" viewBox="0 0 24 24"><path d="M3 10a9 9 0 1 1 2 8M3 4v6h6"/></symbol>
+    <symbol id="i-close" viewBox="0 0 24 24"><path d="m6 6 12 12M18 6 6 18"/></symbol>
+    <symbol id="i-info" viewBox="0 0 24 24"><circle cx="12" cy="12" r="9"/><path d="M12 11v6M12 7v1"/></symbol>
+    <symbol id="i-motion" viewBox="0 0 24 24"><circle cx="14" cy="4" r="2"/><path d="m6 10 4-3 5 2 4 3m-8-4-1 7-5 5m5-5 5 2 2 4"/></symbol>
+  </defs></svg>
+
+  <header class="app-header">
+    <a class="brand" href="/" aria-label="MotionBridge 首页"><span class="brand-mark"><svg><use href="#i-motion"/></svg></span><span>Motion<span class="brand-light">Bridge</span><small>VIDEO TO MOTION</small></span></a>
+    <div class="header-middle"><span class="header-tab active">动作工作台</span><span class="header-divider"></span><span class="header-description">从视频，到可编辑的动作</span></div>
+    <div class="header-right"><span class="local-badge"><i></i>本地运行</span><span id="version" class="version">连接中</span></div>
+  </header>
+
+  <div class="app-layout">
+    <aside class="sidebar">
+      <div class="section-heading"><span class="step-number">01</span><h2>准备素材</h2></div>
+      <label class="dropzone" id="dropzone" tabindex="0" role="button" aria-label="选择或拖入视频">
+        <input id="fileInput" type="file" accept="video/*,.mp4,.mov,.avi,.mkv,.webm" hidden>
+        <span class="upload-icon"><svg><use href="#i-upload"/></svg></span>
+        <strong id="dropTitle">拖入一段人物视频</strong>
+        <span id="dropSubtitle">或点击这里选择文件</span>
+        <span class="file-types" id="fileLimits">MP4 · MOV · WEBM / 最长 60 秒</span>
+      </label>
+      <div class="selected-file hidden" id="selectedFile"><svg><use href="#i-video"/></svg><span><strong id="fileName"></strong><small id="fileSize"></small></span><button class="icon-button" id="clearFile" aria-label="移除视频"><svg><use href="#i-close"/></svg></button></div>
+      <p class="input-tip">单人、全身入镜、固定镜头，动作更容易还原。</p>
+
+      <div class="settings-heading"><h3>处理设置</h3><span id="engineDevice">CPU 推理</span></div>
+      <div class="setting-row"><label for="engineSelect">动作引擎</label><select id="engineSelect"><option value="mediapipe">MediaPipe · 原地动作</option><option value="gvhmr_experimental">GVHMR · 世界动作（实验）</option></select></div>
+      <p id="engineHint" class="field-hint">CPU 单人动作识别。</p>
+      <div id="worldSettings" class="hidden">
+        <label class="toggle-row"><span><strong>手臂异常纠错</strong><small>纠正跳点、去抖并对齐可靠的二维肘腕观测</small></span><input id="worldArmCorrection" type="checkbox" checked><span class="toggle-track"></span></label>
+        <label class="toggle-row"><span><strong>世界接地修正</strong><small>估计支撑脚并限制脚底穿地；仅适用于水平地面</small></span><input id="worldFootContacts" type="checkbox" checked><span class="toggle-track"></span></label>
+        <label class="toggle-row"><span><strong>手臂与躯干避碰</strong><small>按身体比例减少穿插，可能改变贴身手势；不处理衣裙</small></span><input id="worldBodyCollision" type="checkbox" checked><span class="toggle-track"></span></label>
+        <label class="toggle-row"><span><strong>手臂与头脸避碰</strong><small>按头部尺寸减少穿插，可能改变摸脸手势；不含头发和发饰</small></span><input id="worldHeadCollision" type="checkbox" checked><span class="toggle-track"></span></label>
+      </div>
+      <div class="setting-row"><label for="modelSelect">识别模型</label><select id="modelSelect"><option value="full">标准 · Full</option><option value="lite">轻量 · Lite</option></select></div>
+      <div class="setting-row"><label for="fpsSelect">采样帧率</label><select id="fpsSelect"><option value="12">12 FPS</option><option value="15">15 FPS</option><option value="24" selected>24 FPS</option><option value="30">30 FPS</option></select></div>
+      <div class="slider-label"><label for="smoothing">动作平滑</label><output id="smoothValue" for="smoothing">55%</output></div>
+      <input type="range" id="smoothing" min="0" max="1" step="0.05" value="0.55" aria-label="动作平滑强度">
+      <div class="slider-captions"><span>保留细节</span><span>更平滑</span></div>
+      <label class="toggle-row"><span><strong>动作校正</strong><small>校正手脚位置，统一预览与导出</small></span><input id="refineMotion" type="checkbox" checked><span class="toggle-track"></span></label>
+      <label class="toggle-row"><span><strong>旋转稳定</strong><small>减少突然翻转，可能减弱快速动作</small></span><input id="stabilizeRotations" type="checkbox" checked><span class="toggle-track"></span></label>
+      <label class="toggle-row"><span><strong>手脚增强</strong><small>按画面对齐手臂、连续跟踪手腕与支撑脚</small></span><input id="enhanceMotion" type="checkbox" checked><span class="toggle-track"></span></label>
+      <label class="toggle-row"><span><strong>生成 Blender / FBX</strong><small id="blenderHint">同时生成内置人偶与动画</small></span><input id="exports3d" type="checkbox" checked><span class="toggle-track"></span></label>
+      <button class="primary-button" id="startButton" disabled><svg><use href="#i-motion"/></svg><span>开始提取动作</span><svg><use href="#i-arrow"/></svg></button>
+      <button class="demo-button" id="demoButton"><svg><use href="#i-play"/></svg>内置动作演示<span>无需视频</span></button>
+      <div class="sidebar-separator"></div>
+      <div class="history-heading"><h3>最近任务</h3><button id="refreshJobs" class="text-button" aria-label="刷新任务列表">刷新</button></div>
+      <div id="jobsList" class="jobs-list"><div class="empty-history">完成的动作会保存在这里</div></div>
+      <div class="sidebar-footer"><svg><use href="#i-info"/></svg><span>视频在本机处理<br>无需上传到云端</span></div>
+    </aside>
+
+    <main class="workspace">
+      <div class="workspace-heading"><div><span class="eyebrow">MOTION CAPTURE STUDIO</span><h1>让动作，跨越画面。</h1><p id="workspaceSubtitle">导入一段视频，预览骨架，再带入你的创作流程。</p></div><span class="pipeline-badge"><span class="small-dot"></span>单人全身 · 身体动画</span></div>
+
+      <div class="preview-heading"><div class="section-heading"><span class="step-number">02</span><h2>动作预览</h2></div><span class="job-name" id="currentJobName">等待导入素材</span></div>
+      <div class="preview-grid">
+        <section class="preview-card source-card">
+          <div class="preview-toolbar"><span class="panel-title"><svg><use href="#i-video"/></svg>原始视频</span><span class="panel-tag" id="sourceTag">SOURCE</span></div>
+          <div class="preview-stage source-stage" id="sourceStage">
+            <video id="sourceVideo" playsinline muted preload="metadata" class="hidden"></video>
+            <div class="empty-preview" id="sourceEmpty"><span class="frame-corners"></span><svg class="empty-video-icon"><use href="#i-video"/></svg><strong id="sourceEmptyTitle">你的动作，从这里开始</strong><p id="sourceEmptyText">支持常见视频格式<br>也可以先体验内置动作演示</p></div>
+            <span class="stage-corner-label" id="sourceResolution">INPUT</span>
+          </div>
+        </section>
+        <section class="preview-card result-card">
+          <div class="preview-toolbar"><div class="view-tabs" role="tablist" aria-label="预览模式"><button class="view-tab active" data-view="3d" role="tab" aria-selected="true">3D 人偶</button><button class="view-tab" data-view="pose" role="tab" aria-selected="false">彩色骨架</button><button class="view-tab" data-view="overlay" role="tab" aria-selected="false">原片叠加</button></div><button class="icon-button" id="resetCamera" title="重置视角" aria-label="重置三维视角"><svg><use href="#i-reset"/></svg></button></div>
+          <div class="preview-stage result-stage" id="resultStage">
+            <div id="threeViewer" aria-label="三维动作预览，拖动旋转，滚轮缩放"></div>
+            <video id="resultVideo" playsinline muted preload="metadata" class="hidden"></video>
+            <div id="resultEmpty" class="empty-preview hidden"><svg class="empty-video-icon"><use href="#i-motion"/></svg><strong>暂无此预览</strong><p id="resultEmptyText">处理完成后显示彩色姿态视频</p></div>
+            <span class="viewer-mode" id="viewerMode">参考人偶 · 等待动作数据</span>
+            <span class="viewer-instruction" id="viewerInstruction">拖动旋转 · 滚轮缩放</span>
+            <div class="view-presets" id="viewPresets"><button id="frontView" title="正面视角">正面</button><button id="perspectiveView" title="透视视角">透视</button></div>
+          </div>
+        </section>
+      </div>
+
+      <div class="timeline"><button class="play-button" id="playButton" aria-label="播放动作" disabled><svg><use href="#i-play"/></svg></button><span class="time-code" id="currentTime">00:00.00</span><div class="timeline-track"><input type="range" id="timeline" min="0" max="1000" value="0" step="1" disabled aria-label="动作时间轴"><div class="timeline-ticks"><span>00:00</span><span id="timelineMid">—</span><span id="timelineEnd">—</span></div></div><span class="time-code duration" id="totalTime">00:00.00</span><select id="playbackSpeed" aria-label="播放速度"><option value="0.5">0.5×</option><option value="1" selected>1×</option><option value="1.5">1.5×</option><option value="2">2×</option></select><span class="frame-counter" id="frameCounter">— 帧</span></div>
+
+      <section class="status-strip" id="statusStrip" aria-live="polite"><span class="status-indicator" id="statusIndicator"></span><div class="status-description"><strong id="statusTitle">工作台已就绪</strong><span id="statusDetail">选择视频开始，或使用内置演示检查导出流程。</span></div><div id="progressWrap" class="progress-wrap hidden"><div class="progress-track"><div id="progressBar"></div></div><span id="progressValue">0%</span></div><button id="cancelButton" class="secondary-button hidden">取消任务</button><div class="meta-items" id="metaItems"></div></section>
+      <div id="errorBanner" class="error-banner hidden" role="alert"></div>
+      <details id="warningsBox" class="warnings-box hidden"><summary><svg><use href="#i-info"/></svg><span id="warningsTitle">动作说明</span></summary><ul id="warningsList"></ul></details>
+
+      <section class="exports-section"><div class="exports-heading"><div class="section-heading"><span class="step-number">03</span><h2>导出与继续创作</h2></div><a id="downloadAll" class="download-all disabled" aria-disabled="true"><svg><use href="#i-download"/></svg>打包下载</a></div><div class="export-grid">
+        <a class="export-card disabled" id="export-fbx" aria-disabled="true"><span class="format-icon amber">FBX</span><span class="export-copy"><strong>角色骨骼动画</strong><small>Blender / Cinema 4D</small><span class="export-state">等待生成</span></span><svg class="export-arrow"><use href="#i-download"/></svg></a>
+        <a class="export-card disabled" id="export-bvh" aria-disabled="true"><span class="format-icon blue">BVH</span><span class="export-copy"><strong>标准骨骼动作</strong><small>骨骼层级 + 动画</small><span class="export-state">等待生成</span></span><svg class="export-arrow"><use href="#i-download"/></svg></a>
+        <a class="export-card disabled" id="export-pose" aria-disabled="true"><span class="format-icon pink">POSE</span><span class="export-copy"><strong>彩色姿态视频</strong><small>AI 姿态控制工作流</small><span class="export-state">等待生成</span></span><svg class="export-arrow"><use href="#i-download"/></svg></a>
+        <a class="export-card disabled" id="export-blend" aria-disabled="true"><span class="format-icon green">BLEND</span><span class="export-copy"><strong>可编辑工程</strong><small>内置人偶 + 动画轨道</small><span class="export-state">等待生成</span></span><svg class="export-arrow"><use href="#i-download"/></svg></a>
+      </div><div class="export-bottom"><span>基础三维结果仍可能需要动作修正；彩色姿态视频需搭配支持姿态控制的 AI 工作流。</span><button id="blenderExportButton" class="text-button hidden">补充生成 Blender / FBX <span>↗</span></button><button id="reprocessButton" class="text-button hidden" title="使用原设置重新识别并启用动作校正，保留旧结果">用所选引擎重算 ↗</button><a id="motionJsonLink" class="text-button hidden">动作 JSON ↗</a></div></section>
+      <section class="character-panel" aria-labelledby="characterHeading">
+        <div><h2 id="characterHeading">替换到已有角色</h2><p>使用已验证的角色骨架，新建工程并保留源任务。支持已配置的纳西妲与远坂凛；远坂凛衣发可在下方独立处理。</p>
+          <label class="toggle-row"><span><strong>衣物与发饰避碰</strong><small>修正长发和衣裙、减轻局部拉扯，手臂避开发饰；非布料物理</small></span><input id="surfaceClearance" type="checkbox" checked><span class="toggle-track"></span></label>
+          <div class="character-actions"><select id="characterSelect" aria-label="目标角色"><option value="nahida">纳西妲 · 已验证 MMD 骨架</option></select><button id="retargetButton" class="secondary-button" disabled>生成角色工程</button><button id="sourceJobButton" class="text-button hidden">返回源视频任务 ↗</button></div>
+          <p id="characterHint" role="status">正在检查本机角色配置…</p><button id="retryCharacterValidation" class="secondary-button hidden">重试工程验证</button><a id="downloadCharacter" class="text-button hidden">下载纳西妲 Blender 工程 ↗</a>
+        </div>
+        <figure id="characterResult" class="hidden"><img id="characterPreview" alt="目标角色实际 Blender 静帧预览"><figcaption>目标角色静帧 · 完整动画请打开下载的 Blender 工程</figcaption></figure>
+      </section>
+            <section class="secondary-panel" aria-labelledby="secondaryHeading">
+        <div class="secondary-top"><div><span class="eyebrow">MODEL SECONDARY MOTION</span><h2 id="secondaryHeading">衣发动力学</h2><p>先完成角色动作，再让头发和衣服随角色运动。此处独立处理，保留原动作工程。</p></div><span class="secondary-badge">实验功能 · 完整碰撞未验收</span></div>
+        <label class="toggle-row"><span><strong>启用衣发动力学</strong><small>默认关闭；仅处理下方选定的工程</small></span><input id="secondaryEnabled" type="checkbox"><span class="toggle-track"></span></label>
+        <div class="secondary-settings">
+          <label>角色配置<select id="secondaryProfile" aria-label="衣发角色配置"></select></label>
+          <label>动作工程<select id="secondarySource" aria-label="衣发源动作工程"></select></label>
+          <label>处理范围<select id="secondaryMode" aria-label="衣发处理范围"><option value="hair">头发 · 已验收的弹簧发束</option><option value="mmd_tools">Blender 插件 · MMD Tools 衣服与稳发</option><option value="surface">衣服与耦合碰撞 · 实验</option></select></label>
+        </div>
+        <p class="secondary-hint" id="secondaryHint">正在读取角色配置…</p>
+        <div class="character-actions"><button id="secondaryStart" class="primary-button" disabled>开始衣发处理</button><button id="secondaryRefresh" class="text-button">刷新工程与任务</button></div>
+        <p class="secondary-note">新动作：在上方“替换到已有角色”选择远坂凛，生成工程后会自动出现在这里。衣物实验仍有穿插和穿地，处理完成不代表碰撞合格。</p>
+        <div class="secondary-run-layout">
+          <div><h3>衣发任务</h3><div id="secondaryRuns" class="secondary-runs"></div></div>
+          <div class="secondary-run-detail">
+            <p id="secondaryStatus" role="status">尚未选择衣发任务</p>
+            <p id="secondaryQuality" class="secondary-quality"></p>
+            <ol id="secondaryStages" class="secondary-stages"></ol>
+            <div class="character-actions"><button id="secondaryCancel" class="secondary-button hidden">取消衣发任务</button><button id="secondaryResume" class="secondary-button hidden">恢复未完成任务</button><button id="secondaryPreviewRefresh" class="secondary-button hidden">重新生成对照预览</button></div>
+            <p id="secondaryError" class="error-banner hidden" role="alert"></p>
+          </div>
+        </div>
+        <div id="secondaryPreview" class="hidden">
+          <div class="secondary-preview-heading"><h3>同相机前后对照</h3><span id="secondaryFrameLabel"></span></div>
+          <div class="secondary-preview-grid"><figure><img id="secondaryBefore" alt="衣发施力前的实际角色关键帧"><figcaption>施力前</figcaption></figure><figure><img id="secondaryAfter" alt="衣发施力后的实际角色关键帧"><figcaption>施力后</figcaption></figure></div>
+          <input id="secondaryFrame" type="range" min="0" max="4" value="0" step="1" aria-label="衣发对照关键帧">
+          <p class="secondary-note">实际渲染的关键帧对照；完整动画请在 Blender 工程中播放。</p>
+        </div>
+        <div id="secondaryExportArea" class="hidden">
+          <h3>烘焙与导出</h3>
+          <div class="secondary-formats"><label><input type="checkbox" name="secondaryFormat" value="blender" checked> Blender 完整工程</label><label><input type="checkbox" name="secondaryFormat" value="skeleton" checked> 骨骼 FBX</label><label><input type="checkbox" name="secondaryFormat" value="rigid"> 硬饰 FBX</label><label><input type="checkbox" name="secondaryFormat" value="alembic"> 真实形变 Alembic</label></div>
+          <label class="secondary-ack"><input id="secondaryExperimental" type="checkbox">我知道完整碰撞未验收，本次只验证并导出格式</label>
+          <p class="secondary-note">FBX不包含衣服顶点形变；Alembic没有骨骼和形态键，已包含硬饰。完整包要连同缓存保留。C4D内导入尚未实测。</p>
+          <button id="secondaryExport" class="secondary-button" disabled>生成独立导出包</button>
+        </div>
+        <div id="secondaryOutputs" class="secondary-outputs"></div>
+      </section>
+
+      <footer class="workspace-footer"><span>MotionBridge <span class="footer-dot">·</span> 从真实动作，到更多可能</span><span id="connectionState">正在连接本地服务…</span></footer>
+    </main>
+  </div>
+  <div id="toast" class="toast hidden" role="status"></div>
+  <script type="module" src="/static/app.js?v=0.7.0-dev.7&ui=3"></script>
+  <script type="module" src="/static/secondary.js?v=dev28"></script>
+</body>
+</html>

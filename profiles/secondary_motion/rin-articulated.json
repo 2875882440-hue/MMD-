@@ -1,0 +1,18 @@
+{
+  "schema_version": 1,
+  "model_sha256": "eb082ddedbff3d6c7e0551778673988fe9f86e05bc11d8a2baabeaf947cbaef7",
+  "dynamic_rigid_ids": [
+    135,
+    136,
+    137,
+    138
+  ],
+  "joint_ids": [
+    128,
+    129,
+    130,
+    131,
+    132,
+    133
+  ]
+}
